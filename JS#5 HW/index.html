@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title></title>
+</head>
+
+<body>
+    <h1>Contact Book</h1>
+    <form id="todo-form">
+
+        <input type="text" id="task1-input" placeholder="Name"><br><br>
+        <input type="text" id="task2-input" placeholder="Relationship"><br><br>
+        <input type="number" id="task3-input" placeholder="Phone"><br><br>
+        <button type="submit">Add Contact</button>
+        <h2>Contact</h2>
+    </form>
+    <ul id="task-list"></ul>
+
+    <script>
+
+        const form = document.getElementById("todo-form");
+        const taskInput1 = document.getElementById("task1-input");
+        const taskInput2 = document.getElementById("task2-input");
+        const taskInput3 = document.getElementById("task3-input");
+        const taskList = document.getElementById("task-list");
+
+        function addTask(event) {
+            event.preventDefault();
+
+            const listItem = document.createElement('li');
+
+            const taskText1 = taskInput1.value.trim();
+            const taskText2 = taskInput2.value.trim();
+            const taskText3 = taskInput3.value.trim();
+
+            if (taskText1 !== "" || taskText2 !== "" || taskText3 !== "") {
+                listItem.innerHTML = taskText1 + ' ' + taskText2 + ' ' + taskText3;
+
+                const deleteButton = document.createElement("button");
+                deleteButton.textContent = "delete";
+                deleteButton.addEventListener('click', () => {
+                    taskList.removeChild(listItem);
+                });
+
+                listItem.append(deleteButton);
+                taskList.append(listItem);
+            }
+
+            taskInput1.value = "";
+            taskInput2.value = "";
+            taskInput3.value = "";
+        }
+
+        form.addEventListener("submit", addTask);
+
+    </script>
+</body>
+
+</html>
